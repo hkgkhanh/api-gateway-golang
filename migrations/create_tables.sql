@@ -28,3 +28,24 @@ CREATE TABLE IF NOT EXISTS books (
     updated_at timestamp,    
     CONSTRAINT id_unique UNIQUE (id)
 );
+
+CREATE TABLE IF NOT EXISTS users (
+    id serial primary key,
+    first_name varchar(255),
+    last_name varchar(255),
+    email email,
+    phone_number varchar(255),
+    created_at timestamp,
+    updated_at timestamp,    
+    CONSTRAINT id_unique UNIQUE (id)
+);
+
+CREATE TABLE IF NOT EXISTS products (
+    id serial primary key,
+    name varchar(255),
+    manufacturer varchar(255),
+    quantity int,
+    created_at timestamp,
+    updated_at timestamp,    
+    CONSTRAINT id_unique UNIQUE (id)
+);

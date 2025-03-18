@@ -60,6 +60,17 @@ func (app *AppServer) Run(appConfig config.ApiEnvConfig) {
 	// router.Methods("PATCH").Path("/api/book/update").HandlerFunc(app.UpdateBookHandler)
 	// router.Methods("DELETE").Path("/api/book/delete/{id:[0-9]+}").HandlerFunc(app.DeleteBookHandler)
 	// other handlers
+	router.Methods("GET").Path("/api/users").HandlerFunc(app.GetUsersHandler)
+	router.Methods("GET").Path("/api/user/{id:[0-9]+}").HandlerFunc(app.GetUserHandler)
+	router.Methods("POST").Path("/api/user/add").HandlerFunc(app.AddUserHandler)
+	router.Methods("PATCH").Path("/api/user/update").HandlerFunc(app.UpdateUserHandler)
+	router.Methods("DELETE").Path("/api/user/delete/{id:[0-9]+}").HandlerFunc(app.DeleteUserHandler)
+
+	router.Methods("GET").Path("/api/products").HandlerFunc(app.GetProductsHandler)
+	router.Methods("GET").Path("/api/product/{id:[0-9]+}").HandlerFunc(app.GetProductHandler)
+	router.Methods("POST").Path("/api/product/add").HandlerFunc(app.AddProductHandler)
+	router.Methods("PATCH").Path("/api/product/update").HandlerFunc(app.UpdateProductHandler)
+	router.Methods("DELETE").Path("/api/product/delete/{id:[0-9]+}").HandlerFunc(app.DeleteProductHandler)
 
 	if app.Env != config.PROD_ENV {
 		router.Methods("GET").PathPrefix("/api/docs/").Handler(httpSwagger.Handler(
