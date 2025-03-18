@@ -1,0 +1,9 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Api Endpoints for Go Server",
+        "title": "Go Rest Api",
+        "contact": {}
+    },
+    "paths": {}
+}

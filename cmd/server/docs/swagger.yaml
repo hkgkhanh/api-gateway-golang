@@ -1,0 +1,6 @@
+info:
+  contact: {}
+  description: Api Endpoints for Go Server
+  title: Go Rest Api
+paths: {}
+swagger: "2.0"
