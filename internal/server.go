@@ -54,12 +54,7 @@ func (app *AppServer) Run(appConfig config.ApiEnvConfig) {
 	router := mux.NewRouter().StrictSlash(true)
 	router.MethodNotAllowedHandler = http.HandlerFunc(app.NotAllowedHandler)
 	router.NotFoundHandler = http.HandlerFunc(app.NotFoundHandler)
-	// router.Methods("GET").Path("/api/books").HandlerFunc(app.GetBooksHandler)
-	// router.Methods("GET").Path("/api/book/{id:[0-9]+}").HandlerFunc(app.GetBookHandler)
-	// router.Methods("POST").Path("/api/book/add").HandlerFunc(app.AddBookHandler)
-	// router.Methods("PATCH").Path("/api/book/update").HandlerFunc(app.UpdateBookHandler)
-	// router.Methods("DELETE").Path("/api/book/delete/{id:[0-9]+}").HandlerFunc(app.DeleteBookHandler)
-	// other handlers
+
 	router.Methods("GET").Path("/api/users").HandlerFunc(app.GetUsersHandler)
 	router.Methods("GET").Path("/api/user/{id:[0-9]+}").HandlerFunc(app.GetUserHandler)
 	router.Methods("POST").Path("/api/user/add").HandlerFunc(app.AddUserHandler)
