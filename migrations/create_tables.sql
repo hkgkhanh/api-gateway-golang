@@ -17,18 +17,6 @@ BEGIN
 END
 $$;
 
-CREATE TABLE IF NOT EXISTS books (
-    /* Use uuid if desired more security, but be aware of performance reduction with big DBs*/
-    id serial primary key,
-    title varchar(255),
-    author varchar(255),
-    cover_url varchar(255),
-    post_url varchar(255),
-    created_at timestamp,
-    updated_at timestamp,    
-    CONSTRAINT id_unique UNIQUE (id)
-);
-
 CREATE TABLE IF NOT EXISTS users (
     id serial primary key,
     first_name varchar(255),
