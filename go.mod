@@ -43,6 +43,7 @@ require (
 require (
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
 	github.com/go-playground/validator/v10 v10.25.0
+	github.com/golang-jwt/jwt/v5 v5.2.2
 	github.com/golang-migrate/migrate v3.5.4+incompatible
 	github.com/google/uuid v1.6.0
 	github.com/gorilla/mux v1.8.1
