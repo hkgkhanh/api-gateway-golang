@@ -73,21 +73,20 @@ func (h *Handlers) GetUserHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var user model.User
-	user, err = h.Storage.GetUser(ctx, id)
+	// Lấy user từ storage
+	user, err := h.Storage.GetUser(ctx, id)
 	if err != nil {
 		h.Sender.JSON(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	if (model.User{}) == user {
-		h.Sender.JSON(w, http.StatusBadRequest, "User with id="+fmt.Sprint(user.ID)+" not found")
-		if err != nil {
-			panic(err)
-		}
+	// Kiểm tra nếu user không tồn tại
+	if user.ID == 0 {
+		h.Sender.JSON(w, http.StatusBadRequest, fmt.Sprintf("User with id=%d not found", id))
 		return
 	}
 
+	// Xây dựng response cho user
 	userResponse := model.GetUserResponse{
 		ID:          user.ID,
 		FirstName:   user.FirstName,
@@ -96,12 +95,12 @@ func (h *Handlers) GetUserHandler(w http.ResponseWriter, r *http.Request) {
 		PhoneNumber: user.PhoneNumber,
 	}
 
+	// Trả về response
 	err = h.Sender.JSON(w, http.StatusOK, userResponse)
 	if err != nil {
 		logger.OutputLog.WithFields(logrus.Fields{
 			"err": err.Error(),
-		}).Fatal(fmt.Sprint("Error when requesting /user/", user.ID))
-
+		}).Fatal(fmt.Sprintf("Error when requesting /user/%d", user.ID))
 		panic(err)
 	}
 }

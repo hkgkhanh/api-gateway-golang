@@ -72,18 +72,15 @@ func (h *Handlers) GetProductHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var product model.Product
-	product, err = h.Storage.GetProduct(ctx, id)
+	product, err := h.Storage.GetProduct(ctx, id)
 	if err != nil {
 		h.Sender.JSON(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	if (model.Product{}) == product {
-		h.Sender.JSON(w, http.StatusBadRequest, "Product with id="+fmt.Sprint(product.ID)+" not found")
-		if err != nil {
-			panic(err)
-		}
+	// Kiểm tra nếu product không tồn tại
+	if product.ID == 0 {
+		h.Sender.JSON(w, http.StatusBadRequest, fmt.Sprintf("Product with id=%d not found", id))
 		return
 	}
 
@@ -98,8 +95,7 @@ func (h *Handlers) GetProductHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		logger.OutputLog.WithFields(logrus.Fields{
 			"err": err.Error(),
-		}).Fatal(fmt.Sprint("Error when requesting /product/", product.ID))
-
+		}).Fatal(fmt.Sprintf("Error when requesting /product/%d", product.ID))
 		panic(err)
 	}
 }
